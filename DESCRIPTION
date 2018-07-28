@@ -4,7 +4,7 @@ Title: Download and Process Shorelines from the GSHHG database
 Version: 0.1.0
 Author: Jean-Olivier Irisson
 Maintainer: Jean-Olivier Irisson <irisson@normalesup.org>
-License: What license is it under?
 Description: Package with tools to download and manipulate shoreline data from the Global Self-consistent, Hierarchical, High-resolution Geography Database.
+License: LGPL-3
 Encoding: UTF-8
 LazyData: true
