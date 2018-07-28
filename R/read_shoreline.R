@@ -9,12 +9,14 @@
 #' \item 4 : high (h)
 #' \item 5 : full (f)
 #' }
-#' @param level level \strong{down to} which the data should be read
+#' @param levels levels of the data that should be read
 #' \itemize{
-#' \item 1 : boundary between land and ocean
-#' \item 2 : boundary between lake and land
-#' \item 3 : boundary between island-in-lake and lake
-#' \item 4 : boundary between pond-in-island and island
+#' \item 1: Continental land masses and ocean islands, except Antarctica.
+#' \item 2: Lakes
+#' \item 3: Islands in lakes
+#' \item 4: Ponds in islands within lakes
+#' \item 5: Antarctica based on ice front boundary.
+#' \item 6: Antarctica based on grounding line boundary.
 #' }
 #'
 #' @return A "simple feature" (\code{\link[sf]{sf}}) object.
@@ -35,7 +37,7 @@
 #' sf::st_bbox(w)
 #' plot(sf::st_crop(w, xmin=-10, xmax=50, ymin=30, ymax=70), max.plot=1)
 #' # etc.
-read_shoreline <- function(resolution, level, path=getOption("shoreline.path")) {
+read_shoreline <- function(resolution="c", levels=c(1,5), path=getOption("shoreline.path")) {
   # check arguments
   # resolution can be specified either as an abbreviation or as a number
   resolutions <- c("cruise", "low", "intermediate", "high", "full")
@@ -51,14 +53,12 @@ read_shoreline <- function(resolution, level, path=getOption("shoreline.path")) 
   # abbreviate resolution
   resolution <- substr(resolution, 1, 1)
 
-  if (! level %in% 1:4 ) {
-    stop("`level` should be either 1, 2, 3, or 4.")
+  if (! levels %in% 1:6 ) {
+    stop("`levels` should be one of 1, 2, 3, 4, 5, 6.")
   }
-  level <- 1:level
-  # NB: when level 3 is requested, it actually means levels 1 to 3
 
   # list shapefiles to be read
-  shapes <- paste0(path, "/GSHHS_shp/", resolution, "/GSHHS_",resolution, "_L", level, ".shp")
+  shapes <- paste0(path, "/GSHHS_shp/", resolution, "/GSHHS_",resolution, "_L", levels, ".shp")
 
   # test if the data is there and if it is not, download and unzip it
   missing <- shapes[!file.exists(shapes)]

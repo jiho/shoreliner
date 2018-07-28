@@ -4,7 +4,8 @@
 \alias{read_shoreline}
 \title{Read shoreline from GSHHG}
 \usage{
-read_shoreline(resolution, level, path = getOption("shoreline.path"))
+read_shoreline(resolution = "c", levels = c(1, 5),
+  path = getOption("shoreline.path"))
 }
 \arguments{
 \item{resolution}{resolution at which the data should be read; either the full name, an abbreviation, or a number.
@@ -16,12 +17,14 @@ read_shoreline(resolution, level, path = getOption("shoreline.path"))
 \item 5 : full (f)
 }}
 
-\item{level}{level \strong{down to} which the data should be read
+\item{levels}{levels of the data that should be read
 \itemize{
-\item 1 : boundary between land and ocean
-\item 2 : boundary between lake and land
-\item 3 : boundary between island-in-lake and lake
-\item 4 : boundary between pond-in-island and island
+\item 1: Continental land masses and ocean islands, except Antarctica.
+\item 2: Lakes
+\item 3: Islands in lakes
+\item 4: Ponds in islands within lakes
+\item 5: Antarctica based on ice front boundary.
+\item 6: Antarctica based on grounding line boundary.
 }}
 
 \item{path}{path to the GSHHG data. By defautl this is set by an option. If the data is not found, it will be downloaded.}
