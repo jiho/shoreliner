@@ -59,6 +59,8 @@ read_shoreline <- function(resolution="c", levels=c(1,5), path=getOption("shorel
 
   # list shapefiles to be read
   shapes <- paste0(path, "/GSHHS_shp/", resolution, "/GSHHS_",resolution, "_L", levels, ".shp")
+  # one file does not exist in the data, do not try to read it
+  shapes <- shapes[shapes != paste0(path, "/GSHHS_shp/c/GSHHS_c_L4.shp")]
 
   # test if the data is there and if it is not, download and unzip it
   missing <- shapes[!file.exists(shapes)]
