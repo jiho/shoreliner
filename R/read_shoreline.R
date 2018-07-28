@@ -65,7 +65,7 @@ read_shoreline <- function(resolution, level, path=getOption("shoreline.path")) 
   if ( length(missing) > 0 ) {
     message("Cannot find files\n  ", paste(missing, collapse="\n  "))
     message("GSHHG data will be downloaded again in ", path)
-    download_gshhg(path=path)
+    download_shoreline(path=path)
   }
 
   # read all shapefiles in a list

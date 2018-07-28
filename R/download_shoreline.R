@@ -26,10 +26,10 @@ download_shoreline <- function(path=".", set.options=NULL, server="noaa") {
   message("Downloading data (this may take a while)...")
   path <- normalizePath(path)
   destfile <- paste0(path, "/gshhg-shp.zip")
-  download.file(url=paste0(server, "gshhg-shp-2.3.7.zip"), destfile=destfile)
+  utils::download.file(url=paste0(server, "gshhg-shp-2.3.7.zip"), destfile=destfile)
   message("Uncompressing data...")
   path <- paste0(path, "/gshhg-shp/")
-  unzip(destfile, exdir=path)
+  utils::unzip(destfile, exdir=path)
 
   # set options
   opt <- paste0("options(shoreline.path=\"", path, "\")")
