@@ -8,3 +8,6 @@ Description: Package with tools to download and manipulate shoreline data from t
 License: LGPL-3
 Encoding: UTF-8
 LazyData: true
+Imports:
+  sf
+RoxygenNote: 6.0.1
